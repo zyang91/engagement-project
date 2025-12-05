@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anchor Institution Engagement tool</title>
+    <link rel="icon" type="image/svg+xml" href="pic/simplified-shield.ico" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.15.0/mapbox-gl.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="pic/penn.png" alt="penn Logo" class="logo">
+            <h1 class="title">Anchor Institution Engagement Tool</h1>
+        </div>
+    </header>
+    <main>
+        <section id="intro-panel" class="intro-panel" aria-labelledby="intro-heading">
+            <div>
+                <p class="description" id="intro-heading">
+                    This tool makes it simple for Penn students, staff, and neighbors to share quick, helpful feedback about places on and around campus. Click any spot on the map and complete a short form to say what you like, report a problem, or suggest an improvement. Submissions are routed to Penn Facilities and University City managers to guide practical improvements that make the campus better for everyone.
+                </p>
+            </div>
+            <div class="consent-card" aria-label="Participation guidelines and consent">
+                <h2>Before you continue</h2>
+                <p>Please confirm you understand and agree to the following:</p>
+                <ul class="consent-list">
+                    <li>Your submission may be reviewed by Penn Facilities and University City District staff.</li>
+                    <li>Do not include personal health information or sensitive data about others.</li>
+                    <li>Feedback should describe a location on or near campus and suggested improvements.</li>
+                </ul>
+                <label class="consent-check">
+                    <input type="checkbox" id="consent-checkbox">
+                    I understand the participation guidelines above.
+                </label>
+                <p class="disclaimer">Disclaimer: This is a student project for the Penn MUSA JavaScript course created by Zhanchao Yang.</p>
+                <button id="consent-button" class="primary-button" type="button" disabled>I agree &amp; want to continue</button>
+            </div>
+        </section>
+
+        <section id="map-panel" class="map-panel is-hidden" aria-live="polite">
+            <div class="map-instructions">
+                <h2>Share your observations</h2>
+                <ol>
+                    <li>Pan and zoom to the place you want to comment on within the boundary.</li>
+                    <li>Click the map to drop a marker and open the quick feedback form.</li>
+                    <li>Describe the issue, compliment, or suggestion and submit your entry.</li>
+                </ol>
+                <p class="instruction-note">Tip: precise clicks and clear descriptions help staff respond faster.</p>
+                <p class="disclaimer">Disclaimer: Student project for the Penn MUSA JavaScript course by Zhanchao Yang.</p>
+            </div>
+            <section id="feedback-panel" class="feedback-panel is-hidden" aria-live="polite">
+                <div class="feedback-header">
+                    <h3>Quick feedback form</h3>
+                    <p id="selected-location" class="location-label">Click anywhere on the map to set the location for your note.</p>
+                </div>
+                <form id="feedback-form" novalidate>
+                    <input type="hidden" id="location-coordinates" name="locationCoordinates">
+                    <div class="field-group">
+                        <label for="feedback-type">What type of note is this?</label>
+                        <select id="feedback-type" name="feedbackType" required>
+                            <option value="" disabled selected>Select a category</option>
+                            <option value="issue">Problem or maintenance issue</option>
+                            <option value="safety">Safety concern</option>
+                            <option value="accessibility">Accessibility barrier</option>
+                            <option value="kudos">Compliment</option>
+                            <option value="idea">Idea for improvement</option>
+                        </select>
+                    </div>
+                    <div class="field-group">
+                        <label for="feedback-text">Describe what you observed</label>
+                        <textarea id="feedback-text" name="feedbackText" rows="4" placeholder="Share details that will help staff understand and act." required></textarea>
+                    </div>
+                    <div class="field-pair">
+                        <div class="field-group">
+                            <label for="contact-name">Name (optional)</label>
+                            <input type="text" id="contact-name" name="contactName" autocomplete="name" placeholder="You can leave this blank">
+                        </div>
+                        <div class="field-group">
+                            <label for="contact-email">Email (optional)</label>
+                            <input type="email" id="contact-email" name="contactEmail" autocomplete="email" placeholder="Used only if follow-up is needed">
+                        </div>
+                    </div>
+                    <div class="action-row">
+                        <button type="submit" class="primary-button">Submit feedback</button>
+                        <button type="button" id="reset-feedback" class="ghost-button">Clear</button>
+                    </div>
+                    <p id="feedback-status" class="feedback-status" role="status" aria-live="polite"></p>
+                </form>
+            </section>
+            <div id="map" class="map-canvas" role="region" aria-label="University City engagement map"></div>
+        </section>
+    </main>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.15.0/mapbox-gl.js"></script>
+    <script type="module" src="js/index.js"></script>
+</body>
+</html>
